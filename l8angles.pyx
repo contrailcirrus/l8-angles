@@ -20,6 +20,26 @@ cdef int init_lib():
 
 def calculate_angles(metadata_fp, angle_type='BOTH',
                      int subsample=1, bands=None):
+    """Compute per-pixel solar and sensor azimuth and zenith angles from coefficient files.
+
+    Parameters
+    ----------
+    metadata_fp : str
+        Path to the ANG file.
+    angle_type : str (default: 'BOTH')
+        What angles to compute, either 'BOTH', 'SOLAR' or 'SATELLITE'
+    subsample : int (default: 1)
+        Subsample factor, i.e. a subsample of 2 will halve the resolution.
+    bands : list | None (default: None)
+        What bands to compute angles for. By default, all 11 bands are used.
+
+    Returns
+    -------
+    dict
+        A dictionary mapping angle type (sun/sat_az/zn, where az and zn is azimuth and zenith)
+        to lists of numpy 2D arrays. Each array in a list correspond to a single band.
+        The lists are ordered with respect to the input bands.
+    """
 
     cdef int status = 0
 
