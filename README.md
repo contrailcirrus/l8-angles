@@ -14,7 +14,7 @@ To do this in a single step, run
 
 ## Usage
 
-This package exposes a single function `calculate_angles`. See its [docstring](l8angles.pyx) for details.
+This package exposes a function `calculate_angles`. See its [docstring](l8angles.pyx) for details.
 
 ## Example
 
@@ -47,5 +47,26 @@ dict_keys(['sat_az', 'sat_zn'])
 array([[114.15740648, 114.16167023, 114.16593707],
        [114.15843211, 114.16269665, 114.16696429],
        [114.15945794, 114.16372329, 114.16799171]])
+
+```
+
+There is also a `calculate_angles_xarray` function that returns the results as an xarray Dataset.
+
+```python
+>>> import l8angles
+>>> data = l8angles.calculate_angles_xarray(
+...     "test_ANG.txt",
+...     angle_type="SATELLITE",
+...     bands=9,
+... )
+>>> ds = data['sat_az']
+>>> ds
+<xarray.Dataset> Size: 498MB
+Dimensions:  (y: 7931, x: 7841)
+Coordinates:
+  * x        (x) float64 63kB 5.574e+05 5.574e+05 ... 7.926e+05 7.926e+05
+  * y        (y) float64 63kB 6.318e+06 6.318e+06 ... 6.08e+06 6.08e+06
+Data variables:
+    B9       (y, x) float64 497MB nan nan nan nan nan ... nan nan nan nan nan
 
 ```
