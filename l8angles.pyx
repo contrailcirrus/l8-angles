@@ -30,7 +30,7 @@ def calculate_angles(metadata_fp, angle_type='BOTH',
         What angles to compute, either 'BOTH', 'SOLAR' or 'SATELLITE'
     subsample : int (default: 1)
         Subsample factor, i.e. a subsample of 2 will halve the resolution.
-    bands : list | None (default: None)
+    bands : list | int | None (default: None)
         What bands to compute angles for. By default, all 11 bands are used.
 
     Returns
@@ -46,6 +46,8 @@ def calculate_angles(metadata_fp, angle_type='BOTH',
     if bands is None:
         bandlist = np.arange(11, dtype=np.intc)
     else:
+        if isinstance(bands, int):
+            bands = [bands]
         if any(x < 1 for x in bands) or any(x > 11 for x in bands):
             raise ValueError('Invalid bandindex in bandlist')
         bandlist = np.array(bands, dtype=np.intc)
