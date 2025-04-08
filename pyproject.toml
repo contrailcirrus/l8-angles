@@ -1,3 +1,7 @@
 [build-system]
 requires = ["cython>=3", "numpy>=2.0.0", "setuptools>=64"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "l8angles"
+version = "0.1.0"

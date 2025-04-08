@@ -34,13 +34,10 @@ sources = [
 
 extensions = [
     Extension(
-        name="l8angles",
+        name="l8angles_cython",
         sources=sources,
         include_dirs=["src", "src/ias_lib", numpy.get_include()],
     ),
 ]
 
-setup(
-    name="l8angles",
-    ext_modules=cythonize(extensions),
-)
+setup(ext_modules=cythonize(extensions))
